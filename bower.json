@@ -1,0 +1,23 @@
+{
+  "name": "least-squares",
+  "description": "tourist guide to least squares",
+  "main": "index.js",
+  "authors": [
+    "Gary Ballantyne"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.8.3",
+    "bigfoot": "^2.1.4",
+    "KaTeX": "katex#^0.6.0",
+    "skeleton": "^2.0.4"
+  }
+}

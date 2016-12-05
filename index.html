@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 75%;">
+<head>
+
+  <meta charset="utf-8">
+
+  <title>least squares: a tourist's guide</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600'
+  rel='stylesheet' type='text/css'>
+
+
+  <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
+  <link href="bower_components/KaTeX/dist/katex.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="bower_components/bigfoot/dist/bigfoot-number.css">
+  <!--link rel="stylesheet" href="css/custom.css" -->
+
+
+  <script src="bower_components/KaTeX/dist/katex.min.js"></script>
+  <script src="bower_components/KaTeX/dist/contrib/auto-render.min.js"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <!--script src="bower_components/d3/d3.js"></script>
+  <script src="bower_components/numeric/src/numeric.js"></script-->
+  <script src="bower_components/bigfoot/dist/bigfoot.js"></script>
+
+  <link rel="icon" type="image/png" href="bower_components/skeleton/images/favicon.png">
+
+</head>
+
+<body>
+
+  <div class="section">
+    <div class="container">
+      <h3 class="section-heading">Least-squares&mdash;a tourist's guide</h3>
+      <div class="row">
+
+        <div class="one-half column">
+          Before you travel, it is often good to know what to
+          expect&mdash;how to get there and where to go (and
+          why). Along those lines, this is a guide to
+          the <i>essential</i> parts of the least squares (LS)
+          method. So, if you decide to visit, your trip will be
+          smoother and better informed. (Before we begin, please note
+          that footnotes (e.g., <a href="#fn-intro"></a>) are used
+          extensively.)
+        </div>
+
+        <div class="one-half column">
+          <p>
+            LS fits a <em>model</em>
+            to <em>data</em> <a href="#fn-explain"></a>. To be
+            concrete, consider an audio amplifier. An ideal amplifier
+            is a multiplier; it makes the output (\(y\)) a certain
+            multiple (\(k_1\), say) greater than the input
+            (\(x\)). However, in practice, the amplifier will distort
+            as the volume is increased, and a better model
+            is <a href="#fn-model"></a>
+          </p>
+          <p>
+            $$
+            y = k_1 x + k_3 x^3
+            $$
+          </p>
+          <p>
+            Say we measure the input and output of the amplifier to
+            collect several pairs of data: \( (x_1,y_1), (x_2,y_2),
+            ... \). Our goal is to choose \(k_1\) such that
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="one-half column">
+
+          Hello.
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div class="footnotes">
+    <ol>
+      <li class="footnote" id="fn-intro">
+        <p>This is a footnote.</p>
+      </li>
+      <li class="footnote" id="fn-explain">
+        <p>
+          Sometimes, this is expressed as finding a model
+          that <em>explains</em> the data. In any case, we assume that
+          we already know the <em>form</em> of the model, and seek to
+          find good values for its parameters (choosing the form of
+          the model is beyond our present discussion).
+        </p>
+      </li>
+      <li class="footnote" id="fn-model">
+        <p>
+          Critically, this model is <em>linear in its parameters</em>. This means,
+          for example, that if we double \(k_3\) then the contribution
+          from the \(k_3 x^3\) terms doubles.
+        </p>
+        <p>
+          Note that linearity in the parameters is different from
+          linearity in \(x\)...
+        </p>
+        <p>
+          If our model was \(y = k_1x + \ln(k_3)x^3 \), then the model
+          would not be linear in its parameters (doubling (or
+          tripling) \(k_3\) would not make the contribution from the
+          second term two (or three) times greater).
+        </p>
+        <p>
+          Least squares, with a model that is linear in its
+          parameters, is known as "linear least
+          squares"&mdash;generally, if someone just says "least
+          squares", they mean "linear least squares".
+        </p>
+
+      </li>
+    </ol>
+  </div>
+
+
+
+
+  <!--div id='board' style="height:480px;width:960px;border:1px solid
+black; "> </div>
+
+  <div>
+  k1
+  <input type="range" id="k1" class="sliders" step="0.1" min="-1" max="1" value="0.2">
+  </div>
+  <div>
+  k2
+  <input type="range" id="k2" class="sliders" step="0.1" min="-1" max="1" value="0.2">
+  </div>
+
+
+
+  <div id='param' style="height:480px;width:960px;border:1px solid
+green; "> </div-->
+
+  <script type="text/javascript">
+    renderMathInElement(document.body)
+    $.bigfoot()
+  </script>
+
+
+</body>
+
+  <!--script src="compiled/data.js"></script>
+  <script src="compiled/main.js"></script-->
+
+
+</html>
