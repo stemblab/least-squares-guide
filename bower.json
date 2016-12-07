@@ -18,6 +18,7 @@
     "jquery": "1.8.3",
     "bigfoot": "^2.1.4",
     "KaTeX": "katex#^0.6.0",
-    "skeleton": "^2.0.4"
+    "skeleton": "^2.0.4",
+    "d3": "^4.4.0"
   }
 }
