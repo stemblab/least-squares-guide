@@ -1,5 +1,5 @@
 (function() {
-  var Poly, Slider, T, add, d3Object, dot, linspace, norm, paramPlot, paramplot, pi, poly, pow, rep, sub, xyPlot, xyplot,
+  var Poly, Slider, T, add, cfg, d3Object, dot, linspace, mb, mr, norm, paramPlot, paramplot, pi, poly, pow, rep, sld, sub, xyPlot, xyplot,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
@@ -20,6 +20,25 @@
   norm = numeric.norm2;
 
   linspace = numeric.linspace;
+
+  mr = new Vue({
+    el: "#my-range",
+    data: {
+      value: 20
+    }
+  });
+
+  mb = new Vue({
+    el: "#my-button",
+    data: {
+      message: "????"
+    },
+    methods: {
+      report: function() {
+        return mr.value += 1;
+      }
+    }
+  });
 
   d3Object = (function() {
     function d3Object(id) {
@@ -276,9 +295,9 @@
       this.k2 = k21 != null ? k21 : 0.75;
       paramPlot.__super__.constructor.call(this, "param");
       D = poly.D;
-      this.obj.attr("id", "svg").attr('width', 480).attr('height', 480);
+      this.obj.attr("id", "svg").attr('width', '100%').attr('viewBox', '0 0 480 480');
       this.obj.append("rect").attr("x", 0).attr("y", 0).attr("height", 480).attr("width", 480).style("stroke", "blue").style("fill", "none").style("stroke-width", 10);
-      this.space = this.obj.append('g').attr('transform', "translate(" + 480. + "," + 50. + ")").attr('width', width).attr('height', height).attr('id', 'space');
+      this.space = this.obj.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')').attr('width', width).attr('height', height).attr('id', 'space');
       xAxis = this.space.append("g").attr("id", "x-axis").attr("class", "axis").attr("transform", "translate(0, " + (height + 10) + ")").call(this.xAxis);
       this.space.append("g").attr("id", "y-axis").attr("class", "axis").attr("transform", "translate(-10, 0)").call(this.yAxis);
       this.cursor = this.space.append("circle").attr("r", 5);
@@ -362,6 +381,21 @@
     return paramPlot;
 
   })(d3Object);
+
+  sld = document.getElementById('testy');
+
+  cfg = {
+    start: [20, 80],
+    connect: true,
+    range: {
+      'min': 0,
+      'max': 100
+    }
+  };
+
+  console.log("cfg", cfg);
+
+  noUiSlider.create(sld, cfg);
 
   Slider = (function() {
     function Slider(id1, change) {

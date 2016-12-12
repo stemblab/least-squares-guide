@@ -16,6 +16,20 @@ sub = numeric.sub
 norm = numeric.norm2
 linspace = numeric.linspace
 
+mr = new Vue
+  el:"#my-range"
+  data:
+    value: 20
+
+#  computed:
+#    typeOfValue: () ->  console.log "???", typeof this.value
+
+mb = new Vue
+  el: "#my-button"
+  data:
+    message: "????"
+  methods:
+    report: () -> mr.value += 1
 
 class d3Object
 
@@ -252,8 +266,10 @@ class paramPlot extends d3Object
 
     # SVG
     @obj.attr("id", "svg")
-      .attr('width', 480)
-      .attr('height', 480)
+      .attr('width', '100%')
+      .attr('viewBox', '0 0 480 480')
+      #.attr('width', 480)
+      #.attr('height', 480)
 
     # border
     @obj.append("rect")
@@ -268,7 +284,8 @@ class paramPlot extends d3Object
     #---- parameter space ----#
 
     @space = @obj.append('g')
-      .attr('transform', "translate(#{480},#{50})")
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+      #.attr('transform', "translate(#{480},#{50})")
       .attr('width', width)
       .attr('height', height)
       .attr('id','space')
@@ -389,7 +406,18 @@ class paramPlot extends d3Object
     @yAxis = d3.axisLeft()
       .scale(@y)
 
+sld = document.getElementById('testy');
 
+cfg =
+  start: [20, 80]
+  connect: true
+  range:
+    'min': 0
+    'max': 100
+
+console.log "cfg", cfg
+
+noUiSlider.create(sld,cfg)
 
 class Slider
 

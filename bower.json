@@ -20,6 +20,9 @@
     "KaTeX": "katex#^0.6.0",
     "skeleton": "^2.0.4",
     "d3": "^4.4.0",
-    "numeric": "^1.2.6"
+    "numeric": "^1.2.6",
+    "nouislider": "^9.0.0",
+    "vue": "^2.1.4",
+    "rangeslider": "^2.1.0"
   }
 }

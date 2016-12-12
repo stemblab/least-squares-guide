@@ -18,54 +18,69 @@
   <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
   <link href="bower_components/KaTeX/dist/katex.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="bower_components/bigfoot/dist/bigfoot-number.css">
+  <link rel="stylesheet" href="bower_components/nouislider/distribute/nouislider.css">
   <!--link rel="stylesheet" href="css/custom.css" -->
 
 
   <script src="bower_components/KaTeX/dist/katex.min.js"></script>
   <script src="bower_components/KaTeX/dist/contrib/auto-render.min.js"></script>
-  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/d3/d3.min.js"></script>
   <script src="bower_components/numeric/src/numeric.js"></script>
   <script src="bower_components/bigfoot/dist/bigfoot.js"></script>
+  <script src="bower_components/nouislider/distribute/nouislider.js"></script>
+  <script src="bower_components/vue/dist/vue.js"></script>
+  <!-- script src="bower_components/rangeslider/js/rangeslider.js"></script -->
 
   <link rel="icon" type="image/png" href="bower_components/skeleton/images/favicon.png">
+
+
 
 </head>
 
 <body>
 
+  <div id="my-range">
+    <input type="range" min="0" max="100" v-model.number="value"></input>
+    <p>{{value}}</p>
+  </div>
+
+  <div id="my-button">
+    <p>{{message}}</p>
+    <button v-on:click="report"></button>
+  </div>
+
+
   <div class="section">
     <div class="container">
-      <h3 class="section-heading">Least-squares&mdash;a tourist's guide</h3>
+      <h3 class="section-heading">Least squares&mdash;a tourist's
+      guide</h3>
       <div class="row">
 
         <div class="one-half column">
-          Before you travel, it is often good to know what to
-          expect&mdash;how to get there and where to go (and
-          why). Along those lines, this is a guide to
-          the <i>essential</i> parts of the least squares (LS)
-          method. So, if you decide to visit, your trip will be
-          smoother and better informed. (Before we begin, please note
-          that footnotes (e.g., <a href="#fn-intro"></a>) are used
-          extensively.)
+          <p>
+            A travel guide tells you where to go, and why. This is a
+            guide to
+            <a href="https://en.wikipedia.org/wiki/Least_squares">least
+            squares</a> (LS) fitting. It's no substitute for the
+            actual journey, but it may help you along the way. While
+            terse, it is extensively supplemented with footnotes (like
+            this <a href="#fn-intro"></a>).
+          </p>
+          <p>
+            Suppose we have a model <a href="#fn-model"></a> and noisy
+            data <a href="#fn-data"></a>, and seek to
+            estimate <a href="#fn-estimate"></a> the parameters of the
+            model to fit the data <a href="#fn-fit"></a>.  To be
+            concrete, consider an electronic
+            amplifier <a href="#fn-amplifier"></a>, modelled by \(y =
+            k_1 x + k_3 x^3\) (which is <em>linear in its
+            parameters</em> <a href="#fn-linear"></a>).
+          </p>
+
         </div>
 
         <div class="one-half column">
-          <p>
-            LS fits a <em>model</em>
-            to <em>data</em> <a href="#fn-explain"></a>. To be
-            concrete, consider an audio amplifier. An ideal amplifier
-            is a multiplier; it makes the output (\(y\)) a certain
-            multiple (\(k_1\), say) greater than the input
-            (\(x\)). However, in practice, the amplifier will distort
-            as the volume is increased, and a better model
-            is <a href="#fn-model"></a>
-          </p>
-          <p>
-            $$
-            y = k_1 x + k_3 x^3
-            $$
-          </p>
           <p>
             Say we measure the input and output of the amplifier to
             collect several pairs of data: \( (x_1,y_1), (x_2,y_2),
@@ -79,7 +94,6 @@
 
         <div class="one-half column">
 
-
           <div>
             k1
             <input type="range" id="k1" class="sliders" step="0.1" min="-1" max="1" value="0.2">
@@ -88,6 +102,8 @@
             k2
             <input type="range" id="k2" class="sliders" step="0.1" min="-1" max="1" value="0.2">
           </div>
+
+          <div id="testy"></div>
 
 
         </div>
@@ -98,6 +114,12 @@
 
       </div>
 
+      <div class="row">
+        <div class="one-half column">
+          <div id='param' style="border:1px solid green; "> </div>
+        </div>
+      </div>
+
 
     </div>
   </div>
@@ -105,8 +127,53 @@
 
   <div class="footnotes">
     <ol>
+      <li class="footnote" id="fn-linear">
+        <p>
+          Hellow?
+        </p>
+      </li>
+      <li class="footnote" id="fn-distortion">
+        <p>
+          For example, consider the distortion in an audio amplifier
+          when the volume is increased.
+        </p>
+      </li>
+      <li class="footnote" id="fn-fit">
+        <p>
+          The model parameters are chosen by minimizing the sum of the
+          squared distances between the data and the model.
+        </p>
+      </li>
+      <li class="footnote" id="fn-estimate">
+        <p>
+          For the avid
+          traveller, <a href="https://en.wikipedia.org/wiki/Estimation_theory">estimation
+          theory</a> is unmissable: "Estimation theory is a branch of
+          statistics that deals with estimating the values of
+          parameters based on measured empirical data that has a
+          random
+           component."&mdash;<a href="https://en.wikipedia.org/wiki/Estimation_theory">wikipedia</a>
+        </p>
+      </li>
+
       <li class="footnote" id="fn-intro">
-        <p>This is a footnote.</p>
+        <p>Scroll</p>
+        <p>to</p>
+        <p>see</p>
+        <p>very</p>
+        <p>long</p>
+        <p>footnotes.</p>
+      </li>
+      <li class="footnote" id="fn-amplifier">
+        <p>
+          Amplifiers are an essential building block in
+          electronics&mdash;from audio to light. An ideal amplifier
+          simply scales the input: \(y=k_1x\), where \(k_1\) is the
+          "gain". A more realistic model allows for "third order"
+          (i.e., cubic ) distortion: $$y=k_1x+k_3x^3$$ Estimating
+          parameters \(k_1\) and \(k_3\) is a topic of considerable
+          interest in applications.
+        </p>
       </li>
       <li class="footnote" id="fn-explain">
         <p>
@@ -119,27 +186,19 @@
       </li>
       <li class="footnote" id="fn-model">
         <p>
-          Critically, this model is <em>linear in its parameters</em>. This means,
-          for example, that if we double \(k_3\) then the contribution
-          from the \(k_3 x^3\) terms doubles.
+          A model is just a function with parameters to be determined
+          from the data.  For example, say you're in a car travelling
+          at a constant, but unknown speed. A model for how far you've
+          travelled is \(d = vt\)&mdash;where time, \(t\), is an input
+          to the function and speed, \(v\), is an unknown parameter.
         </p>
+      </li>
+      <li class="footnote", id="fn-data">
         <p>
-          Note that linearity in the parameters is different from
-          linearity in \(x\)...
-        </p>
-        <p>
-          If our model was \(y = k_1x + \ln(k_3)x^3 \), then the model
-          would not be linear in its parameters (doubling (or
-          tripling) \(k_3\) would not make the contribution from the
-          second term two (or three) times greater).
-        </p>
-        <p>
-          Least squares, with a model that is linear in its
-          parameters, is known as "linear least
-          squares"&mdash;generally, if someone just says "least
-          squares", they mean "linear least squares".
-        </p>
-
+          Think <em>experimental</em> data, where repeating the
+          measurement yields approximately, but not exactly the same
+          results (e.g., because of random
+          of <a href="https://en.wikipedia.org/wiki/Noise_(signal_processing)">noise</a>).
       </li>
     </ol>
   </div>
